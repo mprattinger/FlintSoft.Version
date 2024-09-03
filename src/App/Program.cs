@@ -1,2 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using FlintSoft.Version;
+using Microsoft.Extensions.DependencyInjection;
+using Version = FlintSoft.Version.Version;
+
+var sp = new ServiceCollection()
+    .AddFlintSoftVersion(typeof(Program).Assembly)
+    .BuildServiceProvider();
+
+var v = sp.GetRequiredService<Version>();
+
+Console.WriteLine(v.GetVersion());
