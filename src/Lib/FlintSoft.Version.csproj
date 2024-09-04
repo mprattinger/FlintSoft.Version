@@ -4,6 +4,17 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <PackageId>FlintSoft.Version</PackageId>
+
+    <Authors>Michael Prattinger</Authors>
+    <Description>This package contains Extensions and Services to get the Version of an dotnet assembly</Description>
+    <PackageProjectUrl>https://github.com/mprattinger/FlintSoft.Version</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <!-- A list of tags to help the search engine to understand the content of the package -->
+    <PackageTags>Assembly Version</PackageTags>
+
   </PropertyGroup>
 
   <ItemGroup>
