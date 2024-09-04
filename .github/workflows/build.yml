@@ -37,15 +37,8 @@ jobs:
     - name: Test
       run: dotnet test --configuration Release --no-restore
     
-    - name: Upload Test Result Files
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results
-        path: ${{ github.workspace }}/**/TestResults/**/*
-        retention-days: 5
+    - name: Path
+      run: pwd
     
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2.16.1
-      if: always()
-      with:
-        trx_files: "${{ github.workspace }}/**/*.trx"
+    - name: List Tests
+      run: ls ${{ github.workspace }}/tests/**/TestResults/*
