@@ -38,24 +38,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test --configuration Release --no-restore 
+      run: dotnet test --configuration Release --no-restore
 
-  build:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: GitVersion Setup
-      uses: gittools/actions/gitversion/setup@v1.1.1
-      with:
-        versionSpec: '5.x'
-    
-    - name: Determine Version
-      uses: gittools/actions/gitversion/execute@v1.1.1
-      id: version
-      with:
-        useConfigFile: true
-        configFilePath: GitVersion.yml
-    
-    - name: Use the version
-      run: |
-        echo ${{ env.semVer }}
+    - name: REf
+      run: echo {{ github.ref }} 
