@@ -30,7 +30,6 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.x
-        cache: true
 
     - name: Restore
       run: dotnet restore
@@ -42,7 +41,9 @@ jobs:
       run: dotnet test --configuration Release --no-restore
     
     - name: Path
-      run: pwd
+      run: |
+        pwd
+        ls ${{ github.workspace }}/tests/
     
     - name: List Tests
-      run: ls ${{ github.workspace }}
+      run: ls ${{ github.workspace }}/tests/**/TestResults/*.trx
