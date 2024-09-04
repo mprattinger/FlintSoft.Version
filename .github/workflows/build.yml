@@ -38,12 +38,17 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test --configuration Release --no-restore
+      run: dotnet test --configuration Release --no-restore --verbosity normal --logger trx
     
-    - name: Path
-      run: |
-        pwd
-        ls ${{ github.workspace }}/tests/
+    - name: Upload Test Result Files
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: ${{ github.workspace }}/tests/**/TestResults/*
+        retention-days: 5
     
-    - name: List Tests
-      run: ls ${{ github.workspace }}/tests/**/TestResults/*.trx
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2.16.1
+      if: always()
+      with:
+        trx_files: "${{ github.workspace }}/**/*.trx"
