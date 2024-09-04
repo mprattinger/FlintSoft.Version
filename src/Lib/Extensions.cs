@@ -11,4 +11,9 @@ public static class Extensions
 
         return services;
     }
+
+    public static string GetVersion(this Assembly assembly) {
+        var v = new Version(assembly);
+        return v.GetVersion();
+    }
 }
