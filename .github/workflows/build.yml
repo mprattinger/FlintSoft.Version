@@ -38,17 +38,24 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test --configuration Release --no-restore --verbosity normal --logger trx
+      run: dotnet test --configuration Release --no-restore 
+
+  build:
+    runs-on: ubuntu-latest
     
-    - name: Upload Test Result Files
-      uses: actions/upload-artifact@v4
+    steps:
+    - name: GitVersion Setup
+      uses: gittools/actions/gitversion/setup@v1.1.1
       with:
-        name: test-results
-        path: ${{ github.workspace }}/tests/**/TestResults/*
-        retention-days: 5
+        versionSpec: '5.x'
     
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2.16.1
-      if: always()
+    - name: Determine Version
+      uses: gittools/actions/gitversion/execute@v1.1.1
+      id: version
       with:
-        trx_files: "${{ github.workspace }}/**/*.trx"
+        useConfigFile: true
+        configFilePath: GitVersion.yml
+    
+    - name: Use the version
+      run: |
+        echo ${{ env.semVer }}
